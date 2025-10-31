@@ -21,7 +21,7 @@ Puedes ver mi portafolio desplegado aquí:
 - TailwindCSS
 
 ## 📸 Vista previa
-![Portafolio](https://astounding-boba-940075.netlify.app/)
+![Portafolio](https://astounding-boba-940075.netlify.app)
 
 ---
 
