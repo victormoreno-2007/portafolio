@@ -21,7 +21,7 @@ Puedes ver mi portafolio desplegado aquí:
 - TailwindCSS
 
 ## 📸 Vista previa
-![Portafolio](https://victormoreno-2007.github.io/me.jpg)
+![Portafolio](https://astounding-boba-940075.netlify.app/)
 
 ---
 
