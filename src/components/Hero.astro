@@ -1,0 +1,54 @@
+---
+const personalImageAlt = "Miguel Ángel"
+import Badge from "@/components/Badge.astro"
+import LinkedInIcon from "@/components/icons/LinkedIn.astro"
+import MailIcon from "@/components/icons/Mail.astro"
+import SocialPill from "@/components/SocialPill.astro"
+import GitHub from "./icons/GitHub.astro"
+---
+
+<section class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-5xl mx-auto mt-10 px-4">
+  <!-- Imagen + badge -->
+  <div class="flex flex-col items-center md:items-start">
+    <img
+      class="rounded-full shadow-xl size-48 md:size-56 object-cover"
+      src="/foto.png"
+      alt={personalImageAlt}
+    />
+    <div class="mt-4">
+      <Badge>Disponible para trabajar</Badge>
+    </div>
+  </div>
+
+  <!-- Texto + contactos -->
+  <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-xl">
+    <h1 class="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white">
+      Hey, soy Victor
+    </h1>
+
+<p class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 dark:[&>strong]:text-yellow-200 [&>strong]:text-black-600 [&>strong]:font-semibold leading-relaxed">      Técnico en Programación de software y desarrollador junior, con 
+      conocimientos en <strong> Python, HTML, CSS, JavaScript, TypeScript, React, Tailwind, Java, Spring Boot, Git y GitHub.</strong>
+    </p>
+
+    <nav class="flex flex-wrap gap-4 mt-8">
+      <SocialPill
+        href="https://mail.google.com/mail/?view=cm&to=vmsamur2007@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MailIcon class="size-5" />
+        Contáctame
+      </SocialPill>
+
+      <SocialPill href="https://www.linkedin.com/in/victor-moreno-931b42386/" target="_blank" rel="noopener noreferrer">
+        <LinkedInIcon class="size-5" />
+        LinkedIn
+      </SocialPill>
+
+      <SocialPill href="https://github.com/victormoreno-2007" target="_blank" rel="noopener noreferrer">
+        <GitHub class="size-5" />
+        GitHub
+      </SocialPill>
+    </nav>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+# --- ASTRO & BUILD OUTPUT ---
+node_modules/
+dist/
+.astro/
+
+# --- LENGUAJES & TIPOS ---
+src/env.d.ts
+
+# --- DEPENDENCIAS (Mantenemos la exclusión de locks si así lo prefieres) ---
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# --- VARIABLES DE ENTORNO & SECRETOS ---
+.env
+.env.production
+.env.*
+!.env.example
+
+# --- CONFIGURACIÓN DE EDITORES (Súper importante) ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- ARCHIVOS DEL SISTEMA ---
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# --- LOGS ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

@@ -1,0 +1,31 @@
+---
+import ExperienceItem from "./ExperienceItem.astro"
+
+const EXPERIENCE = [
+  {
+    date: "Actualmente...",
+    title: "Desarrollador Full Stack (Proyectos Aplicados)",
+    company: "Desarrollo Independiente",
+    description:
+      "Diseño y desarrollo de plataformas Full Stack orientadas a la optimización de procesos empresariales. Implementación de Arquitectura Hexagonal (Puertos y Adaptadores) y principios de código limpio en el backend con Java y Spring Boot, garantizando escalabilidad y seguridad mediante autenticación con tokens JWT. En el frontend, creación de interfaces de usuario dinámicas y fuertemente tipadas con React y TypeScript, integrando gestión de estado global y consumo eficiente de APIs REST.",
+  },
+  {
+    date: "Actualmente...",
+    title: "Técnico en Programación de Software (En formación)",
+    company: "Formación Académica Práctica",
+    description:
+      "Aplicación continua de metodologías ágiles (Scrum) en el ciclo de vida del desarrollo de software. Construcción de aplicaciones completas, desde el modelado de bases de datos relacionales (MySQL) y la automatización del procesamiento de archivos, hasta el despliegue funcional. Profundización práctica en ecosistemas modernos como React, Tailwind CSS, Python (FastAPI) y el ecosistema de Spring.",
+  }
+]
+---
+
+<ol class="relative mt-16">
+  {
+    EXPERIENCE.map((experience) => (
+      <li class="">
+        <ExperienceItem {...experience} />
+      </li>
+    ))
+  }
+</ol>
+
