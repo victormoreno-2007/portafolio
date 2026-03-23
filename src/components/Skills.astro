@@ -1,0 +1,120 @@
+---
+import React from "./icons/React.astro"
+import Tailwind from "./icons/Tailwind.astro"
+import Java from "./icons/java.astro"
+import Spring from "./icons/spring.astro"
+import Python from "./icons/python.astro"
+import JavaScript from "./icons/javascript.astro"
+import Typescript from "./icons/Typescript.astro"
+import GitHub from "./icons/GitHub.astro"
+
+
+// estilo de las habilidades
+const SKILL_STYLES: Record<string, { badge: string; iconColor: string }> = {
+  "Java": {
+    badge: "border-[#007396]/40 bg-[#007396]/10 text-[#007396] shadow-[#007396]/20",
+    iconColor: "text-[#007396]"
+  },
+  "Spring Boot": {
+    badge: "border-[#6DB33F]/40 bg-[#6DB33F]/10 text-[#6DB33F] shadow-[#6DB33F]/20",
+    iconColor: "text-[#6DB33F]"
+  },
+  "Python": {
+    badge: "border-[#3776AB]/40 bg-[#3776AB]/10 text-[#3776AB] shadow-[#3776AB]/20",
+    iconColor: "text-[#3776AB]"
+  },
+  "JavaScript": {
+    badge: "border-[#F7DF1E]/50 bg-[#F7DF1E]/15 text-[#F7DF1E] shadow-[#F7DF1E]/20",
+    iconColor: "text-[#F7DF1E]"
+  },
+  "TypeScript": {
+    badge: "border-[#3178C6]/40 bg-[#3178C6]/10 text-[#3178C6] shadow-[#3178C6]/20",
+    iconColor: "text-[#3178C6]"
+  },
+  "React": {
+    badge: "border-[#00D8FF]/40 bg-[#00D8FF]/10 text-[#00D8FF] shadow-[#00D8FF]/20",
+    iconColor: "text-[#00D8FF]"
+  },
+  "Tailwind CSS": {
+    badge: "border-[#38BDF8]/40 bg-[#38BDF8]/10 text-[#38BDF8] shadow-[#38BDF8]/20",
+    iconColor: "text-[#38BDF8]"
+  },
+  "Git & GitHub": {
+    badge: "border-black/20 bg-gray-100 dark:border-white/20 dark:bg-zinc-800 dark:text-white text-black shadow-zinc-500/10",
+    iconColor: "text-current"
+  }
+}
+
+const SKILLS = [
+  { name: "Java", icon: Java },
+  { name: "Spring Boot", icon: Spring },
+  { name: "Python", icon: Python },
+  { name: "JavaScript", icon: JavaScript },
+  { name: "TypeScript", icon: Typescript },
+  { name: "React", icon: React },
+  { name: "Tailwind CSS", icon: Tailwind },
+  { name: "Git & GitHub", icon: GitHub },
+]
+
+//se duplican las habilidades para que el carrusel sea infinito
+const DUPLICATED_SKILLS = [...SKILLS, ...SKILLS]
+---
+
+<div class="marquee-mask w-full overflow-hidden py-10 relative">
+  
+  <ul class="marquee-content flex w-max gap-6 cursor-default">
+    {
+      DUPLICATED_SKILLS.map((skill) => {
+        const styles = SKILL_STYLES[skill.name] ?? SKILL_STYLES["Git & GitHub"];
+        
+        return (
+          <li class="flex-shrink-0 group">
+            <span
+              class={`flex gap-x-3 items-center rounded-2xl py-3.5 px-7 text-base font-semibold border-2 transition-all duration-300 ease-out shadow-lg 
+                      hover:-translate-y-1.5 hover:scale-105 hover:shadow-current/30 ${styles.badge}`}
+            >
+              <skill.icon class={`size-7 transition-transform duration-300 group-hover:scale-110 ${styles.iconColor}`} />
+              {skill.name}
+            </span>
+          </li>
+        )
+      })
+    }
+  </ul>
+</div>
+
+<style>
+  /*  transición  */
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,1) 15%,
+      rgba(0,0,0,1) 85%,
+      rgba(0,0,0,0) 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,1) 15%,
+      rgba(0,0,0,1) 85%,
+      rgba(0,0,0,0) 100%
+    );
+  }
+
+  /* Animación más lenta */
+  .marquee-content {
+    animation: infinite-scroll-refined 30s linear infinite;
+  }
+
+  /* detener */
+  .marquee-content:hover {
+    animation-play-state: paused !important;
+  }
+
+  /* movimiento continuo */
+  @keyframes infinite-scroll-refined {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+  }
+</style>
