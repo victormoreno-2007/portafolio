@@ -62,7 +62,7 @@ const DUPLICATED_SKILLS = [...SKILLS, ...SKILLS]
 
 <div class="marquee-mask w-full overflow-hidden py-10 relative">
   
-  <ul class="marquee-content flex w-max gap-6 cursor-default">
+  <ul class="marquee-content flex w-max gap-6 cursor-pointer">
     {
       DUPLICATED_SKILLS.map((skill) => {
         const styles = SKILL_STYLES[skill.name] ?? SKILL_STYLES["Git & GitHub"];
