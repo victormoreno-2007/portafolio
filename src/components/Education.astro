@@ -1,0 +1,37 @@
+---
+import ExperienceItem from "./ExperienceItem.astro"
+import Link from "./icons/Link.astro"
+
+const EDUCATION = [
+  {
+    date: "Actualidad",
+    title: "Técnico Laboral en Programación de Software",
+    company: "Campuslands",
+    description: "Profundizando mis conocimientos en el desarrollo web Full Stack, arquitecturas modernas, buenas prácticas y nuevas herramientas del ecosistema tecnológico.",
+  },
+  {
+    date: "2023 - 2024", 
+    title: "Técnico en Programación de Software",
+    company: "SENA",
+    description: "Formación técnica donde adquirí bases sólidas en lógica de programación, diseño de bases de datos relacionales y desarrollo de interfaces de usuario.",
+    link: "https://drive.google.com/file/d/1i_B6cARG7Loun5q2p-qRs_TPViEXDXuH/view?usp=sharing", 
+    linkName: "Ver certificado"
+},
+  {
+    date: "2024", 
+    title: "Bachiller Académico",
+    company: "I.E La Inmaculada Concepción",
+    description: "Educación secundaria completada con éxito.",
+  }
+]
+---
+
+<ol class="relative mt-16">
+  {
+    EDUCATION.map((education) => (
+      <li class="">
+        <ExperienceItem {...education} />
+      </li>
+    ))
+  }
+</ol>

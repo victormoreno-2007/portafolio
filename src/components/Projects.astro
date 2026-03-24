@@ -6,15 +6,14 @@ import React from "./icons/React.astro"
 import TypeScript from "./icons/Typescript.astro"
 import fastapi from "./icons/Fastapi.astro"
 import Link from "./icons/Link.astro"
-import LinkButton from "./LinkButton.astro" // Importación ajustada al nivel local
+import LinkButton from "./LinkButton.astro"
 import Html from "./icons/html.astro"
 import Css from "./icons/css.astro"
 import JavaScript from "./icons/javascript.astro"
 import Spring from "./icons/spring.astro"
 import Java from "./icons/java.astro"
+import SystemIcon from "./icons/System.astro"
 
-// Diccionario único y limpio para todas tus tecnologías
-// Usamos el mismo diseño "Premium" (bordes y fondos semi-transparentes)
 const TAGS = {
   REACT: {
     name: "React",
@@ -66,6 +65,21 @@ const TAGS = {
     class: "border-[#6DB33F]/40 bg-[#6DB33F]/10 text-[#6DB33F]",
     icon: Spring,
   },
+  N8N: {
+    name: "n8n",
+    class: "border-[#ea4669]/40 bg-[#ea4669]/10 text-[#ea4669]",
+    icon: SystemIcon, 
+  },
+  GEMINI: {
+    name: "Google Gemini (IA)",
+    class: "border-[#8E75B2]/40 bg-[#8E75B2]/10 text-[#8E75B2]",
+    icon: SystemIcon,
+  },
+  POSTGRESQL: {
+    name: "PostgreSQL",
+    class: "border-[#336791]/40 bg-[#336791]/10 text-[#336791]",
+    icon: SystemIcon,
+  },
 }
 
 const PROJECTS = [
@@ -98,6 +112,13 @@ const PROJECTS = [
     image: "/projects/springBoot.png",
     tags: [TAGS.JAVA, TAGS.SPRING, TAGS.REACT, TAGS.CSS, TAGS.TYPESCRIPT],
   },
+  {
+    title: "AI Travel Copilot - Asistente de Rutas Inteligente",
+    description: "Flujo de trabajo automatizado que analiza rutas geolocalizadas, consulta el clima en múltiples puntos del trayecto y utiliza agentes de IA (Google Gemini) para generar recomendaciones de seguridad vial personalizadas (moto, carro o a pie). Incluye procesamiento de datos geográficos con JavaScript y persistencia en bases de datos relacionales.",
+    github: "", 
+    image: "/projects/n8n.png",
+    tags: [TAGS.N8N, TAGS.GEMINI, TAGS.POSTGRESQL, TAGS.JAVASCRIPT],
+  },
 ]
 ---
 
@@ -106,11 +127,21 @@ const PROJECTS = [
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
-          <div class="relative flex flex-col items-center gap-8 transition-all duration-500 ease-in-out transform shadow-xl overflow-hidden rounded-xl border border-black/10 dark:border-white/10 group-hover:-translate-y-2 group-hover:shadow-2xl">
+          <div class="relative flex flex-col items-center gap-8 transition-all duration-500 ease-in-out transform overflow-hidden rounded-xl 
+                      /* Estilos base de borde y sombra sutil (Light/Dark) */
+                      border border-gray-200 dark:border-white/10 
+                      shadow-xl shadow-blue-500/5 dark:shadow-cyan-500/5
+                      
+                      /* EFECTOS HOVER: Elevación, borde de color y resplandor intenso */
+                      group-hover:-translate-y-2 
+                      group-hover:shadow-2xl 
+                      group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30 
+                      group-hover:border-blue-500 dark:group-hover:border-cyan-5=600/50">
             <img 
               alt={title} 
-              class="object-cover object-top w-full h-56 md:h-full transition duration-500 group-hover:scale-110" 
+              class="object-cover object-top w-full aspect-video transition duration-500 group-hover:scale-110" 
               src={image} 
+              loading="lazy"
             />
           </div>
         </div>

@@ -8,6 +8,11 @@ const navItems = [
     url: "/#habilidades",
   },
   {
+    title: "Sobre mí",
+    label: "sobre-mi",
+    url: "/#sobre-mi",
+  },
+  {
     title: "Experiencia",
     label: "experiencia",
     url: "/#experiencia",
@@ -16,12 +21,8 @@ const navItems = [
     title: "Proyectos",
     label: "proyectos",
     url: "/#proyectos",
-  },
-  {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
-  },
+  }
+  
 ]
 ---
 
@@ -30,7 +31,7 @@ const navItems = [
     {
       navItems.map((link) => (
         <a
-          class="relative block px-3 py-1.5 transition-all duration-300 ease-out rounded-full hover:bg-black/10 dark:hover:bg-white/10 hover:text-blue-600 dark:hover:text-cyan-400"
+          class="relative block px-3 py-1.5 transition-all duration-300 ease-out rounded-full hover:bg-black/10 dark:hover:bg-white/10 hover:text-blue-800 dark:hover:text-cyan-400"
           aria-label={link.label}
           href={link.url}
         >
