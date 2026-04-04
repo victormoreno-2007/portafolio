@@ -33,9 +33,13 @@ const { description, title } = Astro.props;
         class="absolute top-0 z-[-2] h-screen w-screen bg-white dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
       >
       </div>
-      <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"
+      <canvas
+        id="particle-canvas"
+        class="absolute inset-0 w-full h-full"
       ></canvas>
+      <div id="cursor-glow"></div>
     </div>
+
     <Header />
     <slot />
     <Footer />
@@ -205,6 +209,23 @@ const { description, title } = Astro.props;
 
         document.addEventListener("astro:page-load", initReveal);
         initReveal();
+        function initCursorGlow() {
+          const glow = document.getElementById("cursor-glow") as HTMLElement;
+          if (!glow) return;
+
+          window.addEventListener("mousemove", (e) => {
+            glow.style.left = e.clientX + "px";
+            glow.style.top = e.clientY + "px";
+            glow.style.opacity = "1";
+          });
+
+          window.addEventListener("mouseleave", () => {
+            glow.style.opacity = "0";
+          });
+        }
+
+        document.addEventListener("astro:page-load", initCursorGlow);
+        initCursorGlow();
       })();
     </script>
 
@@ -340,7 +361,7 @@ const { description, title } = Astro.props;
       }
       .reveal {
         opacity: 0;
-        transform: translate-y(32px);
+        transform: translateY(32px);
         transition:
           opacity 0.6s ease,
           transform 0.6s ease;
@@ -349,6 +370,31 @@ const { description, title } = Astro.props;
       .reveal.visible {
         opacity: 1;
         transform: translateY(0);
+      }
+      #cursor-glow {
+        position: fixed;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+        opacity: 0;
+        background: radial-gradient(
+          circle,
+          rgba(120, 118, 203, 0.8) 0%,
+          rgba(106, 105, 179, 0.02) 40%,
+          transparent 70%
+        );
+      }
+
+      .dark #cursor-glow {
+        background: radial-gradient(
+          circle,
+          rgba(99, 179, 237, 0.1) 0%,
+          rgba(99, 179, 237, 0.04) 40%,
+          transparent 70%
+        );
       }
     </style>
   </body>
