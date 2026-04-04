@@ -1,33 +1,49 @@
 ---
-const personalImageAlt = "Victor Moreno"
-import Badge from "@/components/Badge.astro"
-import LinkedInIcon from "@/components/icons/LinkedIn.astro"
-import MailIcon from "@/components/icons/Mail.astro"
-import SocialPill from "@/components/SocialPill.astro"
-import GitHub from "./icons/GitHub.astro"
+const personalImageAlt = "Victor Moreno";
+import Badge from "@/components/Badge.astro";
+import LinkedInIcon from "@/components/icons/LinkedIn.astro";
+import MailIcon from "@/components/icons/Mail.astro";
+import SocialPill from "@/components/SocialPill.astro";
+import GitHub from "./icons/GitHub.astro";
 ---
 
-<section class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-5xl mx-auto mt-10 px-4">
+<section
+  class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-5xl mx-auto mt-10 px-4"
+>
   <!-- Imagen + badge -->
   <div class="flex flex-col items-center md:items-start">
-    <img
-      class="rounded-full shadow-xl size-48 md:size-56 object-cover"
-      src="/foto.png"
-      alt={personalImageAlt}
-    />
+    <div class="relative size-48 md:size-56">
+      <div class="ring-wrapper">
+        <img
+          class="absolute inset-[4px] rounded-full object-cover w-[calc(100%-8px)] h-[calc(100%-8px)]"
+          src="/foto.png"
+          alt={personalImageAlt}
+        />
+      </div>
+    </div>
     <div class="mt-4">
       <Badge>Disponible para trabajar</Badge>
     </div>
   </div>
 
   <!-- Texto + contactos -->
-  <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-xl">
-    <h1 class="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white">
+  <div
+    class="flex flex-col items-center md:items-start text-center md:text-left max-w-xl"
+  >
+    <h1
+      class="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white"
+    >
       Hola, soy <span class="animated-gradient-text">Victor</span>
     </h1>
 
-    <p class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400">
-          Técnico en Programación de Software y Desarrollador Web. Me enfoco en <strong>crear soluciones tecnológicas eficientes, automatizar procesos y construir aplicaciones escalables</strong>. Me apasiona transformar ideas en código y aprender constantemente para aportar el mayor valor posible.
+    <p
+      class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400"
+    >
+      Técnico en Programación de Software y Desarrollador Web. Me enfoco en <strong
+        >crear soluciones tecnológicas eficientes, automatizar procesos y
+        construir aplicaciones escalables</strong
+      >. Me apasiona transformar ideas en código y aprender constantemente para
+      aportar el mayor valor posible.
     </p>
 
     <nav class="flex flex-wrap gap-4 mt-8">
@@ -40,12 +56,20 @@ import GitHub from "./icons/GitHub.astro"
         Contáctame
       </SocialPill>
 
-      <SocialPill href="https://www.linkedin.com/in/victor-moreno-931b42386/" target="_blank" rel="noopener noreferrer">
+      <SocialPill
+        href="https://www.linkedin.com/in/victor-moreno-931b42386/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <LinkedInIcon class="size-5" />
         LinkedIn
       </SocialPill>
 
-      <SocialPill href="https://github.com/victormoreno-2007" target="_blank" rel="noopener noreferrer">
+      <SocialPill
+        href="https://github.com/victormoreno-2007"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <GitHub class="size-5" />
         GitHub
       </SocialPill>
@@ -54,13 +78,7 @@ import GitHub from "./icons/GitHub.astro"
 </section>
 <style>
   .animated-gradient-text {
-    background: linear-gradient(
-      90deg,
-      #3b82f6,
-      #8b5cf6,
-      #06b6d4,
-      #3b82f6
-    );
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
@@ -69,7 +87,45 @@ import GitHub from "./icons/GitHub.astro"
   }
 
   @keyframes gradient-move {
-    0%   { background-position: 0% center; }
-    100% { background-position: 200% center; }
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
   }
+  .ring-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+  background-size: 300% 300%;
+  animation: ring-rotate 3s linear infinite;
+  position: relative;
+}
+
+.ring-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: white;
+  z-index: 0;
+}
+
+:global(.dark) .ring-wrapper::before {
+  background: #0f172a;
+}
+
+.ring-wrapper img {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ring-rotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 </style>
