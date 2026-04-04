@@ -36,14 +36,10 @@ import GitHub from "./icons/GitHub.astro";
       Hola, soy <span class="animated-gradient-text">Victor</span>
     </h1>
 
-    <p
-      class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400"
-    >
-      Técnico en Programación de Software y Desarrollador Web. Me enfoco en <strong
-        >crear soluciones tecnológicas eficientes, automatizar procesos y
-        construir aplicaciones escalables</strong
-      >. Me apasiona transformar ideas en código y aprender constantemente para
-      aportar el mayor valor posible.
+    
+    <p 
+      class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400">
+      <span id="typewriter-text"></span><span id="typewriter-cursor" class="typewriter-cursor">|</span>
     </p>
 
     <nav class="flex flex-wrap gap-4 mt-8">
@@ -76,6 +72,45 @@ import GitHub from "./icons/GitHub.astro";
     </nav>
   </div>
 </section>
+<script>
+  function initTypewriter() {
+    const el = document.getElementById('typewriter-text');
+    const cursor = document.getElementById('typewriter-cursor');
+    if (!el || !cursor) return;
+
+    const text = 'Técnico en Programación de Software y Desarrollador Web. Me enfoco en crear soluciones tecnológicas eficientes, automatizar procesos y construir aplicaciones escalables. Me apasiona transformar ideas en código y aprender constantemente para aportar el mayor valor posible.';
+
+    const boldStart = text.indexOf('crear soluciones');
+    const boldEnd   = text.indexOf('aplicaciones escalables.') + 'aplicaciones escalables.'.length;
+
+    let i = 0;
+    el.innerHTML = '';
+
+    const interval = setInterval(() => {
+      i++;
+      const current = text.slice(0, i);
+      const before = current.slice(0, boldStart);
+      const bold   = current.slice(boldStart, Math.min(i, boldEnd));
+      const after  = current.slice(Math.min(i, boldEnd));
+
+      if (i <= boldStart) {
+        el.innerHTML = current;
+      } else if (i <= boldEnd) {
+        el.innerHTML = before + '<strong class="font-semibold text-blue-600 dark:text-cyan-400">' + bold + '</strong>';
+      } else {
+        el.innerHTML = before + '<strong class="font-semibold text-blue-600 dark:text-cyan-400">' + text.slice(boldStart, boldEnd) + '</strong>' + after;
+      }
+
+      if (i >= text.length) {
+        clearInterval(interval);
+        cursor.style.display = 'none'; 
+      }
+    }, 14); 
+  }
+
+  document.addEventListener('astro:page-load', initTypewriter);
+  initTypewriter();
+</script>
 <style>
   .animated-gradient-text {
     background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
@@ -127,5 +162,18 @@ import GitHub from "./icons/GitHub.astro";
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  background-color: currentColor;
+  margin-left: 2px;
+  animation: blink 0.8s step-end infinite;
+  font-weight: 100;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 </style>
