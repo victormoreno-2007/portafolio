@@ -1,16 +1,16 @@
 ---
-import "@fontsource-variable/onest"
+import "@fontsource-variable/onest";
 
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
-import { ViewTransitions } from "astro:transitions"
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
-const { description, title } = Astro.props
+const { description, title } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,9 +26,15 @@ const { description, title } = Astro.props
   </head>
 
   <body class="relative text-black dark:text-white">
-    <div class="fixed left-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950">
-      <div class="absolute top-0 z-[-2] h-screen w-screen bg-white dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
+    <div
+      class="fixed left-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950"
+    >
+      <div
+        class="absolute top-0 z-[-2] h-screen w-screen bg-white dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+      >
+      </div>
+      <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"
+      ></canvas>
     </div>
     <Header />
     <slot />
@@ -37,9 +43,11 @@ const { description, title } = Astro.props
     <script>
       (function () {
         function initParticles() {
-          const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+          const canvas = document.getElementById(
+            "particle-canvas",
+          ) as HTMLCanvasElement;
           if (!canvas) return;
-          const ctx = canvas.getContext('2d')!;
+          const ctx = canvas.getContext("2d")!;
 
           let W = (canvas.width = window.innerWidth);
           let H = (canvas.height = window.innerHeight);
@@ -52,8 +60,10 @@ const { description, title } = Astro.props
           const mouse = { x: -9999, y: -9999 };
 
           interface Particle {
-            x: number; y: number;
-            vx: number; vy: number;
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
             r: number;
           }
 
@@ -66,7 +76,7 @@ const { description, title } = Astro.props
           }));
 
           function isDark() {
-            return document.documentElement.classList.contains('dark');
+            return document.documentElement.classList.contains("dark");
           }
 
           let rafId: number;
@@ -76,11 +86,9 @@ const { description, title } = Astro.props
 
             const dark = isDark();
             const dotColor = dark
-              ? 'rgba(148, 163, 184, 0.65)'
-              : 'rgba(71, 85, 105, 0.5)';
-            const lineBase = dark
-              ? '148, 163, 184'
-              : '71, 85, 105';
+              ? "rgba(148, 163, 184, 0.65)"
+              : "rgba(71, 85, 105, 0.5)";
+            const lineBase = dark ? "148, 163, 184" : "71, 85, 105";
 
             for (const p of particles) {
               const dx = p.x - mouse.x;
@@ -88,7 +96,8 @@ const { description, title } = Astro.props
               const dist = Math.hypot(dx, dy);
 
               if (dist < REPULSE_RADIUS && dist > 0) {
-                const force = ((REPULSE_RADIUS - dist) / REPULSE_RADIUS) * REPULSE_STRENGTH;
+                const force =
+                  ((REPULSE_RADIUS - dist) / REPULSE_RADIUS) * REPULSE_STRENGTH;
                 p.vx += (dx / dist) * force;
                 p.vy += (dy / dist) * force;
               }
@@ -98,10 +107,22 @@ const { description, title } = Astro.props
               p.x += p.vx;
               p.y += p.vy;
 
-              if (p.x < 0) { p.x = 0; p.vx *= -1; }
-              if (p.x > W) { p.x = W; p.vx *= -1; }
-              if (p.y < 0) { p.y = 0; p.vy *= -1; }
-              if (p.y > H) { p.y = H; p.vy *= -1; }
+              if (p.x < 0) {
+                p.x = 0;
+                p.vx *= -1;
+              }
+              if (p.x > W) {
+                p.x = W;
+                p.vx *= -1;
+              }
+              if (p.y < 0) {
+                p.y = 0;
+                p.vy *= -1;
+              }
+              if (p.y > H) {
+                p.y = H;
+                p.vy *= -1;
+              }
             }
 
             for (let i = 0; i < particles.length; i++) {
@@ -146,20 +167,44 @@ const { description, title } = Astro.props
             H = canvas.height = window.innerHeight;
           }
 
-          window.addEventListener('mousemove', onMouseMove);
-          window.addEventListener('mouseleave', onMouseLeave);
-          window.addEventListener('resize', onResize);
+          window.addEventListener("mousemove", onMouseMove);
+          window.addEventListener("mouseleave", onMouseLeave);
+          window.addEventListener("resize", onResize);
 
-          document.addEventListener('astro:before-swap', () => {
-            cancelAnimationFrame(rafId);
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseleave', onMouseLeave);
-            window.removeEventListener('resize', onResize);
-          }, { once: true });
+          document.addEventListener(
+            "astro:before-swap",
+            () => {
+              cancelAnimationFrame(rafId);
+              window.removeEventListener("mousemove", onMouseMove);
+              window.removeEventListener("mouseleave", onMouseLeave);
+              window.removeEventListener("resize", onResize);
+            },
+            { once: true },
+          );
         }
 
-        document.addEventListener('astro:page-load', initParticles);
+        document.addEventListener("astro:page-load", initParticles);
         initParticles();
+        function initReveal() {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                  observer.unobserve(entry.target); // se anima solo una vez
+                }
+              });
+            },
+            { threshold: 0.15 },
+          );
+
+          document
+            .querySelectorAll(".reveal")
+            .forEach((el) => observer.observe(el));
+        }
+
+        document.addEventListener("astro:page-load", initReveal);
+        initReveal();
       })();
     </script>
 
@@ -168,33 +213,65 @@ const { description, title } = Astro.props
         color-scheme: light dark;
       }
 
-      
       html {
         font-family: "Onest Variable", system-ui, sans-serif;
         scroll-behavior: smooth;
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%231d4ed8" stroke="white" stroke-width="2"><path d="M3 3l7.062 18 3.531-7.062L21 10.406z"/></svg>') 0 0, auto;
+        cursor:
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%231d4ed8" stroke="white" stroke-width="2"><path d="M3 3l7.062 18 3.531-7.062L21 10.406z"/></svg>')
+            0 0,
+          auto;
       }
 
-      a, button, [role="button"], input, textarea, select, .cursor-pointer {
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%231d4ed8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>') 8 0, pointer !important;
+      a,
+      button,
+      [role="button"],
+      input,
+      textarea,
+      select,
+      .cursor-pointer {
+        cursor:
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%231d4ed8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>')
+            8 0,
+          pointer !important;
       }
 
-      a:hover, button:hover, [role="button"]:hover {
-         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%231d4ed8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>') 8 0, pointer !important;
+      a:hover,
+      button:hover,
+      [role="button"]:hover {
+        cursor:
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%231d4ed8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>')
+            8 0,
+          pointer !important;
       }
 
       .dark html {
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%230ea5e9" stroke="white" stroke-width="2"><path d="M3 3l7.062 18 3.531-7.062L21 10.406z"/></svg>') 0 0, auto;
+        cursor:
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%230ea5e9" stroke="white" stroke-width="2"><path d="M3 3l7.062 18 3.531-7.062L21 10.406z"/></svg>')
+            0 0,
+          auto;
       }
 
-      .dark a, .dark button, .dark [role="button"], .dark input, .dark textarea, .dark select, .dark .cursor-pointer {
-        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%230ea5e9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>') 8 0, pointer !important;
+      .dark a,
+      .dark button,
+      .dark [role="button"],
+      .dark input,
+      .dark textarea,
+      .dark select,
+      .dark .cursor-pointer {
+        cursor:
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%230ea5e9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>')
+            8 0,
+          pointer !important;
       }
 
-      .dark a:hover, .dark button:hover, .dark [role="button"]:hover {
-         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%230ea5e9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>') 8 0, pointer !important;
+      .dark a:hover,
+      .dark button:hover,
+      .dark [role="button"]:hover {
+        cursor:
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%230ea5e9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M13 11V9a1.5 1.5 0 0 1 3 0v2"/><path d="M16 11V9.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-1c-1.6 0-3.1-.7-4-2l-2.5-3.5a2 2 0 0 1 3-2.5L10 14V11z"/></svg>')
+            8 0,
+          pointer !important;
       }
-
 
       body {
         color: rgba(17, 17, 17, 0.9);
@@ -260,6 +337,18 @@ const { description, title } = Astro.props
             border-radius: 9999px;
           }
         }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translate-y(32px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
   </body>
