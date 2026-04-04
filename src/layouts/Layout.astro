@@ -28,11 +28,141 @@ const { description, title } = Astro.props
   <body class="relative text-black dark:text-white">
     <div class="fixed left-0 top-0 -z-10 h-full w-full bg-white dark:bg-slate-950">
       <div class="absolute top-0 z-[-2] h-screen w-screen bg-white dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+      <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
     </div>
     <Header />
     <slot />
     <Footer />
-    
+
+    <script>
+      (function () {
+        function initParticles() {
+          const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+          if (!canvas) return;
+          const ctx = canvas.getContext('2d')!;
+
+          let W = (canvas.width = window.innerWidth);
+          let H = (canvas.height = window.innerHeight);
+
+          const COUNT = 150;
+          const CONNECT_DIST = 160;
+          const REPULSE_RADIUS = 130;
+          const REPULSE_STRENGTH = 8;
+
+          const mouse = { x: -9999, y: -9999 };
+
+          interface Particle {
+            x: number; y: number;
+            vx: number; vy: number;
+            r: number;
+          }
+
+          const particles: Particle[] = Array.from({ length: COUNT }, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.6,
+            vy: (Math.random() - 0.5) * 0.6,
+            r: Math.random() * 1.5 + 1,
+          }));
+
+          function isDark() {
+            return document.documentElement.classList.contains('dark');
+          }
+
+          let rafId: number;
+
+          function animate() {
+            ctx.clearRect(0, 0, W, H);
+
+            const dark = isDark();
+            const dotColor = dark
+              ? 'rgba(148, 163, 184, 0.65)'
+              : 'rgba(71, 85, 105, 0.5)';
+            const lineBase = dark
+              ? '148, 163, 184'
+              : '71, 85, 105';
+
+            for (const p of particles) {
+              const dx = p.x - mouse.x;
+              const dy = p.y - mouse.y;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < REPULSE_RADIUS && dist > 0) {
+                const force = ((REPULSE_RADIUS - dist) / REPULSE_RADIUS) * REPULSE_STRENGTH;
+                p.vx += (dx / dist) * force;
+                p.vy += (dy / dist) * force;
+              }
+
+              p.vx *= 0.94;
+              p.vy *= 0.94;
+              p.x += p.vx;
+              p.y += p.vy;
+
+              if (p.x < 0) { p.x = 0; p.vx *= -1; }
+              if (p.x > W) { p.x = W; p.vx *= -1; }
+              if (p.y < 0) { p.y = 0; p.vy *= -1; }
+              if (p.y > H) { p.y = H; p.vy *= -1; }
+            }
+
+            for (let i = 0; i < particles.length; i++) {
+              for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const d = Math.hypot(dx, dy);
+                if (d < CONNECT_DIST) {
+                  const alpha = (1 - d / CONNECT_DIST) * 0.45;
+                  ctx.beginPath();
+                  ctx.moveTo(particles[i].x, particles[i].y);
+                  ctx.lineTo(particles[j].x, particles[j].y);
+                  ctx.strokeStyle = `rgba(${lineBase}, ${alpha})`;
+                  ctx.lineWidth = 0.7;
+                  ctx.stroke();
+                }
+              }
+            }
+
+            for (const p of particles) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+              ctx.fillStyle = dotColor;
+              ctx.fill();
+            }
+
+            rafId = requestAnimationFrame(animate);
+          }
+
+          animate();
+
+          function onMouseMove(e: MouseEvent) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+          }
+          function onMouseLeave() {
+            mouse.x = -9999;
+            mouse.y = -9999;
+          }
+          function onResize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+          }
+
+          window.addEventListener('mousemove', onMouseMove);
+          window.addEventListener('mouseleave', onMouseLeave);
+          window.addEventListener('resize', onResize);
+
+          document.addEventListener('astro:before-swap', () => {
+            cancelAnimationFrame(rafId);
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseleave', onMouseLeave);
+            window.removeEventListener('resize', onResize);
+          }, { once: true });
+        }
+
+        document.addEventListener('astro:page-load', initParticles);
+        initParticles();
+      })();
+    </script>
+
     <style is:global>
       :root {
         color-scheme: light dark;
