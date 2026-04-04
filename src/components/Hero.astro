@@ -23,7 +23,7 @@ import GitHub from "./icons/GitHub.astro"
   <!-- Texto + contactos -->
   <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-xl">
     <h1 class="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white">
-      Hola, soy Victor
+      Hola, soy <span class="animated-gradient-text">Victor</span>
     </h1>
 
     <p class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400">
@@ -52,3 +52,24 @@ import GitHub from "./icons/GitHub.astro"
     </nav>
   </div>
 </section>
+<style>
+  .animated-gradient-text {
+    background: linear-gradient(
+      90deg,
+      #3b82f6,
+      #8b5cf6,
+      #06b6d4,
+      #3b82f6
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-move 3s linear infinite;
+  }
+
+  @keyframes gradient-move {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+</style>
