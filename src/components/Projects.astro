@@ -93,7 +93,7 @@ const PROJECTS = [
   {
     title: "Tienda online",
     description: "Crear una aplicación web que consuma datos desde una API pública, los represente dinámicamente en el DOM, y permita a los usuarios interactuar con dichos productos a través de un sistema de carrito de compras con persistencia de datos en localStorage.",
-    link: "https://project-javascript-3yyh5oqpj-victor-morenos-projects-91b4041e.vercel.app/",
+    link: "https://project-javascript-inky.vercel.app/",
     github: "https://github.com/victormoreno-2007/ProjectJavascript.git",
     image: "/projects/javascript.png",
     tags: [TAGS.HTML, TAGS.CSS, TAGS.JAVASCRIPT],
@@ -129,25 +129,33 @@ const PROJECTS = [
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
-          <div class="relative flex flex-col items-center gap-8 transition-all duration-500 ease-in-out transform overflow-hidden rounded-xl
-            border border-white/20 dark:border-white/10
-            bg-white/60 dark:bg-white/5
-            backdrop-blur-md
-            shadow-xl shadow-blue-500/5 dark:shadow-cyan-500/5
-            group-hover:-translate-y-2
-            group-hover:shadow-2xl
-            group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30
-            group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50">
+          <div class="relative transition-all duration-500 rounded-2xl p-3
+                      border border-white/30 dark:border-white/10
+                      bg-white/20 dark:bg-white/[0.03]
+                      backdrop-blur-md
+                      shadow-xl shadow-blue-500/10 dark:shadow-cyan-500/10
+                      group-hover:-translate-y-2
+                      group-hover:shadow-2xl
+                      group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30
+                      group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50">
             <img 
               alt={title} 
-              class="object-cover object-top w-full aspect-video transition duration-500 group-hover:scale-110" 
+              class="object-cover object-top w-full aspect-video rounded-xl transition duration-500 group-hover:scale-105" 
               src={image} 
               loading="lazy"
             />
           </div>
         </div>
 
-        <div class="w-full md:w-1/2 md:max-w-lg flex flex-col justify-center">
+        <div class="w-full md:w-1/2 md:max-w-lg flex flex-col justify-center
+                    rounded-xl p-6
+                    border border-white/20 dark:border-white/10
+                    bg-white/20 dark:bg-white/[0.03]
+                    backdrop-blur-md
+                    shadow-xl shadow-blue-500/5 dark:shadow-cyan-500/5
+                    transition-all duration-500
+                    group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50
+                    group-hover:shadow-2xl group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30">
           <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
             {title}
           </h3>
