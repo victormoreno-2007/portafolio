@@ -129,7 +129,7 @@ const PROJECTS = [
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
-          <div class="relative transition-all duration-500 rounded-2xl p-3
+          <div class="spotlight-card relative transition-all duration-500 rounded-2xl p-3
                       border border-white/30 dark:border-white/10
                       bg-white/20 dark:bg-white/[0.03]
                       backdrop-blur-md
@@ -137,7 +137,8 @@ const PROJECTS = [
                       group-hover:-translate-y-2
                       group-hover:shadow-2xl
                       group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30
-                      group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50">
+                      group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50 overflow-hidden">
+            <div class="spotlight"></div>
             <img 
               alt={title} 
               class="object-cover object-top w-full aspect-video rounded-xl transition duration-500 group-hover:scale-105" 
@@ -155,7 +156,8 @@ const PROJECTS = [
                     shadow-xl shadow-blue-500/5 dark:shadow-cyan-500/5
                     transition-all duration-500
                     group-hover:border-blue-500/50 dark:group-hover:border-cyan-500/50
-                    group-hover:shadow-2xl group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30">
+                    group-hover:shadow-2xl group-hover:shadow-blue-600/20 dark:group-hover:shadow-cyan-400/30 spotlight-card overflow-hidden relative">
+          <div class="spotlight"></div>
           <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
             {title}
           </h3>
@@ -196,3 +198,59 @@ const PROJECTS = [
     ))
   }
 </div>
+
+<script>
+  function initSpotlight() {
+    const cards = document.querySelectorAll('.spotlight-card');
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const mouseEvent = e as MouseEvent;
+        const rect = card.getBoundingClientRect();
+        const x = mouseEvent.clientX - rect.left;
+        const y = mouseEvent.clientY - rect.top;
+
+        (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+        (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSpotlight);
+  initSpotlight();
+</script>
+
+<style>
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .spotlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(56, 189, 248, 0.15),
+      transparent 40%
+    );
+    z-index: 10;
+  }
+
+  .spotlight-card:hover .spotlight {
+    opacity: 1;
+  }
+  
+  :global(.dark) .spotlight {
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(34, 211, 238, 0.1),
+      transparent 40%
+    );
+  }
+</style>
