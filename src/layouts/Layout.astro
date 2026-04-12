@@ -40,6 +40,8 @@ const { description, title } = Astro.props;
       <div id="cursor-glow"></div>
     </div>
 
+    <div id="scroll-progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 z-50 w-0 transition-all duration-75 shadow-[0_0_10px_rgba(56,189,248,0.7)]"></div>
+
     <Header />
     <slot />
     <Footer />
@@ -226,6 +228,20 @@ const { description, title } = Astro.props;
 
         document.addEventListener("astro:page-load", initCursorGlow);
         initCursorGlow();
+
+        function initScrollProgress() {
+          const progressBar = document.getElementById("scroll-progress-bar");
+          if (!progressBar) return;
+          
+          window.addEventListener("scroll", () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            progressBar.style.width = scrolled + "%";
+          });
+        }
+        document.addEventListener("astro:page-load", initScrollProgress);
+        initScrollProgress();
       })();
     </script>
 
