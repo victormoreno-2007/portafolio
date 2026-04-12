@@ -17,6 +17,18 @@
    
   </div>
 
-  <img width="200" height="200" src="/iamgen_cv.png" alt={personalImageAlt} class="order-1 object-cover w-64 h-full p-1 md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-black/20 dark:bg-yellow-500/5 ring-1 ring-black/70 dark:ring-white/20 " style="object-position: 50% 50%">
+  <img width="200" height="200" src="/iamgen_cv.png" alt={personalImageAlt} class="levitate-photo order-1 object-cover w-64 h-full p-1 md:order-2 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-black/20 dark:bg-yellow-500/5 ring-1 ring-black/70 dark:ring-white/20" style="object-position: 50% 50%">
 
 </article>
+
+<style>
+  @keyframes levitate {
+    0%   { transform: translateY(0px) rotate(4deg); }
+    50%  { transform: translateY(-15px) rotate(7deg); }
+    100% { transform: translateY(0px) rotate(4deg); }
+  }
+
+  .levitate-photo {
+    animation: levitate 5s ease-in-out infinite;
+  }
+</style>
