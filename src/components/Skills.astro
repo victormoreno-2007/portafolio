@@ -7,6 +7,10 @@ import Python from "./icons/python.astro"
 import JavaScript from "./icons/javascript.astro"
 import Typescript from "./icons/Typescript.astro"
 import GitHub from "./icons/GitHub.astro"
+import N8n from "./icons/n8n.astro"
+import MySQL from "./icons/MySQL.astro"
+import Postgres from "./icons/Postgres.astro"
+import Fastapi from "./icons/Fastapi.astro"
 
 
 // estilo de las habilidades
@@ -42,6 +46,22 @@ const SKILL_STYLES: Record<string, { badge: string; iconColor: string }> = {
   "Git & GitHub": {
     badge: "border-black/20 bg-gray-100 dark:border-white/20 dark:bg-zinc-800 dark:text-white text-black shadow-zinc-500/10",
     iconColor: "text-current"
+  },
+  "n8n": {
+    badge: "border-[#FF6D5A]/40 bg-[#FF6D5A]/10 text-[#FF6D5A] shadow-[#FF6D5A]/20",
+    iconColor: "text-[#FF6D5A]"
+  },
+  "MySQL": {
+    badge: "border-[#4479A1]/40 bg-[#4479A1]/10 text-[#4479A1] shadow-[#4479A1]/20",
+    iconColor: "text-[#4479A1]"
+  },
+  "PostgreSQL": {
+    badge: "border-[#4169E1]/40 bg-[#4169E1]/10 text-[#4169E1] shadow-[#4169E1]/20",
+    iconColor: "text-[#4169E1]"
+  },
+  "FastAPI": {
+    badge: "border-[#05998B]/40 bg-[#05998B]/10 text-[#05998B] shadow-[#05998B]/20",
+    iconColor: "text-[#05998B]"
   }
 }
 
@@ -54,6 +74,10 @@ const SKILLS = [
   { name: "React", icon: React },
   { name: "Tailwind CSS", icon: Tailwind },
   { name: "Git & GitHub", icon: GitHub },
+  { name: "n8n", icon: N8n },
+  { name: "MySQL", icon: MySQL },
+  { name: "PostgreSQL", icon: Postgres },
+  { name: "FastAPI", icon: Fastapi },
 ]
 
 //se duplican las habilidades para que el carrusel sea infinito
