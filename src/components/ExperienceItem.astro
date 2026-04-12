@@ -18,7 +18,10 @@ const { title, company, description, link, linkName = "Saber más", date } = Ast
 >
   <div class="relative pb-12 md:col-span-2">
     <div class="sticky top-0">
-      <span class="text-blue-600 dark:text-cyan-400 -left-[42px] absolute rounded-full text-5xl">&bull;</span>
+      <span class="absolute -left-[43px] flex items-center justify-center">
+        <span class="pulse-ring"></span>
+        <span class="pulse-dot"></span>
+      </span>
       <h3 class="text-xl font-bold text-blue-600 dark:text-cyan-400">{title}</h3>
       <h4 class="font-semibold text-xl text-gray-800 dark:text-gray-200 mt-1">{company}</h4>
       <time class="p-0 m-0 text-sm text-gray-600/80 dark:text-white/60">{date}</time>
@@ -52,3 +55,39 @@ const { title, company, description, link, linkName = "Saber más", date } = Ast
     }
   </div>
 </div>
+
+<style>
+  .pulse-dot {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #2563eb; /* blue-600 */
+    box-shadow: 0 0 8px 2px rgba(37, 99, 235, 0.7);
+    z-index: 1;
+  }
+
+  :global(.dark) .pulse-dot {
+    background-color: #22d3ee; /* cyan-400 */
+    box-shadow: 0 0 8px 2px rgba(34, 211, 238, 0.7);
+  }
+
+  .pulse-ring {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: rgba(37, 99, 235, 0.25);
+    animation: radar-ping 2s ease-out infinite;
+  }
+
+  :global(.dark) .pulse-ring {
+    background-color: rgba(34, 211, 238, 0.2);
+  }
+
+  @keyframes radar-ping {
+    0%   { transform: scale(0.5); opacity: 1; }
+    80%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+</style>
