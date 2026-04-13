@@ -14,6 +14,10 @@ import Spring from "./icons/spring.astro"
 import Java from "./icons/java.astro"
 import SystemIcon from "./icons/System.astro"
 
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const TAGS = {
   REACT: {
     name: "React",
@@ -84,38 +88,46 @@ const TAGS = {
 
 const PROJECTS = [
   {
-    title: "Gestor de Reservas de Salas de Coworking",
-    description: "Construir una API REST con Python que permita el registro e inicio de sesión de usuarios con autenticación, la creación y administración de salas de coworking, sistema de reservas con validaciones de horarios y la generación de reportes simples.",
+    title: t("projects.item1.title"),
+    description: t("projects.item1.description"),
+    btnCode: t("projects.item1.btn"),
     github: "https://github.com/victormoreno-2007/gestorReservas.git",
     image: "/projects/svgl.webp", 
     tags: [TAGS.PYTHON, TAGS.FASTAPI],
   },
   {
-    title: "Tienda online",
-    description: "Crear una aplicación web que consuma datos desde una API pública, los represente dinámicamente en el DOM, y permita a los usuarios interactuar con dichos productos a través de un sistema de carrito de compras con persistencia de datos en localStorage.",
+    title: t("projects.item2.title"),
+    description: t("projects.item2.description"),
+    btnCode: t("projects.item2.btn"),
+    btnWeb: t("projects.item2.btn2"),
     link: "https://project-javascript-inky.vercel.app/",
     github: "https://github.com/victormoreno-2007/ProjectJavascript.git",
     image: "/projects/javascript.png",
     tags: [TAGS.HTML, TAGS.CSS, TAGS.JAVASCRIPT],
   },
   {
-    title: "CrediYa - Sistema de Gestión de Préstamos y Pagos",
-    description: "Aplicación desarrollada en Java para la administración integral de créditos. Implementa una arquitectura basada en capas (Dominio, Datos, Servicio y Vista) con conexión a bases de datos relacionales mediante JDBC. Permite gestionar clientes, empleados, calcular cuotas de préstamos y procesar pagos con validación de reglas de negocio.",
+    title: t("projects.item3.title"),
+    description: t("projects.item3.description"),
+    btnCode: t("projects.item3.btn"),
     github: "https://github.com/victormoreno-2007/crediya",
     image: "/projects/crediya.png",
     tags: [TAGS.JAVA],
   },
   {
-    title: "Construrrenta - Plataforma Full Stack de Renta de Equipos",
-    description: "Sistema integral de alquiler con control de roles (Administrador, Proveedor, Cliente). Backend desarrollado con Java y Spring Boot aplicando Arquitectura Hexagonal y seguridad basada en tokens JWT. Frontend construido con React y TypeScript, implementando gestión de estado global, carritos de reserva y paneles administrativos interactivos.",
+    title: t("projects.item4.title"),
+    description: t("projects.item4.description"),
+    btnCode: t("projects.item4.btn"),
+    btnWeb: t("projects.item4.btn2"),
     link: "https://proyecto-spring-boot-front.vercel.app",
     github: "https://github.com/victormoreno-2007/proyecto-spring-boot",
     image: "/projects/springBoot.png",
     tags: [TAGS.JAVA, TAGS.SPRING, TAGS.REACT, TAGS.CSS, TAGS.TYPESCRIPT],
   },
   {
-    title: "AI Travel Copilot - Asistente de Rutas Inteligente",
-    description: "Flujo de trabajo automatizado que analiza rutas geolocalizadas, consulta el clima en múltiples puntos del trayecto y utiliza agentes de IA (Google Gemini) para generar recomendaciones de seguridad vial personalizadas (moto, carro o a pie). Incluye procesamiento de datos geográficos con JavaScript y persistencia en bases de datos relacionales.",
+    title: t("projects.item5.title"),
+    description: t("projects.item5.description"),
+    btnCode: t("projects.item5.btn"),
+    btnWeb: t("projects.item5.btn2"),
     link: "https://www.youtube.com/watch?v=vZHZ1SE1nxg",
     github: "https://github.com/victormoreno-2007/proyecto_clima_n8n", 
     image: "/projects/n8n.png",
@@ -126,7 +138,7 @@ const PROJECTS = [
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, link, github }) => (
+    PROJECTS.map(({ image, title, description, tags, link, github, btnCode, btnWeb }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="spotlight-card relative transition-all duration-500 rounded-2xl p-3
@@ -182,13 +194,13 @@ const PROJECTS = [
               {github && (
                 <LinkButton href={github}>
                   <GitHub class="size-5" />
-                  Ver código
+                  {btnCode}
                 </LinkButton>
               )}
               {link && (
                 <LinkButton href={link}>
                   <Link class="size-5" />
-                  Ir al sitio web
+                  {btnWeb}
                 </LinkButton>
               )}
             </footer>

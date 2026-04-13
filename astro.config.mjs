@@ -6,6 +6,16 @@ import robotsTxt from "astro-robots-txt"
 export default defineConfig({
   integrations: [tailwind(), robotsTxt()],
   site: 'https://porfolio.dev/',
+  i18n: {
+    defaultLocale: "es",
+    locales: [ "es", "en"],
+    routing: {
+      prefixDefaultLocale: false,
+    }
+  },
+  integrations: [tailwind(),
+    robotsTxt()
+  ],
   devToolbar: {
     enabled: false,
   },

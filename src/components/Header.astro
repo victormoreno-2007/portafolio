@@ -1,28 +1,30 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro"
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const navItems = [
   {
-    title: "Habilidades",
+    title: t("nav.skills"),
     label: "habilidades",
     url: "/#habilidades",
   },
   {
-    title: "Sobre mí",
+    title: t("nav.about"),
     label: "sobre-mi",
     url: "/#sobre-mi",
   },
   {
-    title: "Educación",
+    title: t("nav.education"),
     label: "educacion",
     url: "/#educacion",
   },
   {
-    title: "Proyectos",
+    title: t("nav.projects"),
     label: "proyectos",
     url: "/#proyectos",
   }
-  
 ]
 ---
 
@@ -39,7 +41,13 @@ const navItems = [
         </a>
       ))
     }
-    <div id="google_translate_element"></div>
+    <a 
+      href={lang === 'es' ? '/en/' : '/'} 
+      class="font-bold px-2 py-1 transition-colors hover:text-blue-600 dark:hover:text-cyan-400 text-gray-800 dark:text-gray-200"
+      title={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+    >
+      {lang === 'es' ? 'EN' : 'ES'}
+    </a>
     <ThemeToggle />
   </nav>
 </header>

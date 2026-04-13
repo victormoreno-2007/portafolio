@@ -5,12 +5,17 @@ import LinkedInIcon from "@/components/icons/LinkedIn.astro";
 import MailIcon from "@/components/icons/Mail.astro";
 import SocialPill from "@/components/SocialPill.astro";
 import GitHub from "./icons/GitHub.astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+// extraer texto de subtitulo
+const heroText = t("hero.subtitle");
+const heroBold = t("hero.subtitle_bold");
 ---
 
 <section
   class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-5xl mx-auto mt-10 px-4"
 >
-  <!-- Imagen + badge -->
   <div class="flex flex-col items-center md:items-start">
     <div class="relative size-48 md:size-56">
       <div class="ring-wrapper">
@@ -22,23 +27,25 @@ import GitHub from "./icons/GitHub.astro";
       </div>
     </div>
     <div class="mt-4">
-      <Badge>Disponible para trabajar</Badge>
+      <Badge>{t("hero.badge")}</Badge>
     </div>
   </div>
 
-  <!-- Texto + contactos -->
   <div
     class="flex flex-col items-center md:items-start text-center md:text-left max-w-xl"
   >
     <h1
       class="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white"
     >
-      Hola, soy <span class="animated-gradient-text">Victor</span>
+      {t("hero.title").split("Victor")[0]} <span class="animated-gradient-text">Victor</span>
     </h1>
 
     
     <p 
-      class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400">
+      class="mt-6 text-lg sm:text-xl text-gray-800 dark:text-gray-300 [&>strong]:font-semibold leading-relaxed [&>strong]:text-blue-600 dark:[&>strong]:text-cyan-400"
+      data-hero-text={heroText}
+      data-hero-bold={heroBold}
+    >
       <span id="typewriter-text"></span><span id="typewriter-cursor" class="typewriter-cursor">|</span>
     </p>
 
@@ -49,7 +56,7 @@ import GitHub from "./icons/GitHub.astro";
         rel="noopener noreferrer"
       >
         <MailIcon class="size-5" />
-        Contáctame
+        {t("hero.contact")}
       </SocialPill>
 
       <SocialPill
@@ -58,7 +65,7 @@ import GitHub from "./icons/GitHub.astro";
         rel="noopener noreferrer"
       >
         <LinkedInIcon class="size-5" />
-        LinkedIn
+        {t("hero.linkedin")}
       </SocialPill>
 
       <SocialPill
@@ -67,33 +74,35 @@ import GitHub from "./icons/GitHub.astro";
         rel="noopener noreferrer"
       >
         <GitHub class="size-5" />
-        GitHub
+        {t("hero.github")}
       </SocialPill>
     </nav>
   </div>
 </section>
 <script>
-  let typewriterInterval: ReturnType<typeof setInterval>;
-
   function initTypewriter() {
     const el = document.getElementById('typewriter-text');
     const cursor = document.getElementById('typewriter-cursor');
-    if (!el || !cursor) return;
+    const wrapper = el?.closest('p');
+    
+    if (!el || !cursor || !wrapper) return;
 
-    if (typewriterInterval) clearInterval(typewriterInterval);
+    const heroText = wrapper.getAttribute('data-hero-text');
+    const heroBold = wrapper.getAttribute('data-hero-bold');
+    if (!heroText || !heroBold) return;
 
-    const text = 'Técnico en Programación de Software y Desarrollador Web. Me enfoco en crear soluciones tecnológicas eficientes, automatizar procesos y construir aplicaciones escalables. Me apasiona transformar ideas en código y aprender constantemente para aportar el mayor valor posible.';
+    if ((window as any).typewriterInterval) clearInterval((window as any).typewriterInterval);
 
-    const boldStart = text.indexOf('crear soluciones');
-    const boldEnd   = text.indexOf('aplicaciones escalables.') + 'aplicaciones escalables.'.length;
+    const boldStart = heroText.indexOf(heroBold);
+    const boldEnd   = boldStart + heroBold.length;
 
     let i = 0;
     el.innerHTML = '';
     cursor.style.display = 'inline-block';
 
-    typewriterInterval = setInterval(() => {
+    (window as any).typewriterInterval = setInterval(() => {
       i++;
-      const current = text.slice(0, i);
+      const current = heroText.slice(0, i);
       const before = current.slice(0, boldStart);
       const bold   = current.slice(boldStart, Math.min(i, boldEnd));
       const after  = current.slice(Math.min(i, boldEnd));
@@ -103,19 +112,17 @@ import GitHub from "./icons/GitHub.astro";
       } else if (i <= boldEnd) {
         el.innerHTML = before + '<strong class="font-semibold text-blue-600 dark:text-cyan-400">' + bold + '</strong>';
       } else {
-        el.innerHTML = before + '<strong class="font-semibold text-blue-600 dark:text-cyan-400">' + text.slice(boldStart, boldEnd) + '</strong>' + after;
+        el.innerHTML = before + '<strong class="font-semibold text-blue-600 dark:text-cyan-400">' + heroText.slice(boldStart, boldEnd) + '</strong>' + after;
       }
 
-      if (i >= text.length) {
-        clearInterval(typewriterInterval);
+      if (i >= heroText.length) {
+        clearInterval((window as any).typewriterInterval);
         cursor.style.display = 'none'; 
       }
     }, 18); 
   }
 
   document.addEventListener('astro:page-load', initTypewriter);
-  // Se ejecuta la primera vez por si no se usa astro:page-load internamente
-  initTypewriter();
 </script>
 <style>
   .animated-gradient-text {

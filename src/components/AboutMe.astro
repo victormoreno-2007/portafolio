@@ -1,19 +1,16 @@
 ---
  const personalImageAlt = "Victor Moreno"
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <article class="flex flex-col items-center justify-center gap-8 text-gray-700 dark:text-gray-300 md:flex-row">
   
   <div class="mt-6 text-lg text-gray-800 dark:text-gray-300 leading-relaxed text-pretty order-2 md:order-1[&>p]:mb-6 [&_strong]:font-semibold [&_strong]:text-blue-600 dark:[&_strong]:text-cyan-400">
-    <p>
-      Mi camino en el desarrollo de software nació de la curiosidad por resolver problemas complejos y automatizar procesos. A lo largo de mi formación, he construido una base sólida en el ecosistema Full Stack, disfrutando tanto de la creación de <strong>interfaces dinámicas (React, Tailwind)</strong> como del diseño de <strong>arquitecturas backend robustas (Spring Boot, FastAPI)</strong>.
-    </p>
-    <p>
-      Me apasiona desarrollar soluciones tecnológicas integrales que generen un impacto real en las operaciones empresariales. En mis proyectos, voy más allá de escribir código funcional: aplico <strong>patrones de diseño avanzados como Arquitectura Hexagonal</strong>, garantizo la seguridad mediante tokens JWT y estructuro bases de datos relacionales eficientes.
-    </p>
-    <p>
-      Trabajo con un enfoque fuertemente colaborativo y me adapto con facilidad a entornos impulsados por <strong>metodologías ágiles (Scrum)</strong>. Mi objetivo es seguir evolucionando profesionalmente, aportando mi capacidad de análisis, energía y compromiso a equipos que busquen llevar sus productos al siguiente nivel.
-    </p>
+    <p set:html={t('aboutMe.p1')}></p>
+    <p set:html={t('aboutMe.p2')}></p>
+    <p set:html={t('aboutMe.p3')}></p>
    
   </div>
 

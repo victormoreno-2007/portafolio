@@ -1,27 +1,31 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro"
 import Link from "./icons/Link.astro"
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const EDUCATION = [
   {
-    date: "Actualidad",
-    title: "Técnico Laboral en Programación de Software",
-    company: "Campuslands",
-    description: "Profundizando mis conocimientos en el desarrollo web Full Stack, arquitecturas modernas, buenas prácticas y nuevas herramientas del ecosistema tecnológico.",
+    date: t("education.item1.date"),
+    title: t("education.item1.title"),
+    company: t("education.item1.school"),
+    description: t("education.item1.description"),
   },
   {
-    date: "2023 - 2024", 
-    title: "Técnico en Programación de Software",
-    company: "SENA",
-    description: "Formación técnica donde adquirí bases sólidas en lógica de programación, diseño de bases de datos relacionales y desarrollo de interfaces de usuario.",
+    date: t("education.item2.date"),
+    title: t("education.item2.title"),
+    company: t("education.item2.school"),
+    description: t("education.item2.description"),
     link: "https://drive.google.com/file/d/1i_B6cARG7Loun5q2p-qRs_TPViEXDXuH/view?usp=sharing", 
-    linkName: "Ver certificado"
+    linkName: t("education.item2.certificate")
 },
   {
-    date: "2024", 
-    title: "Bachiller Académico",
-    company: "I.E La Inmaculada Concepción",
-    description: "Educación secundaria completada con éxito.",
+    date: t("education.item3.date"), 
+    title: t("education.item3.title"),
+    company: t("education.item3.school"),
+    description: t("education.item3.description"),
   }
 ]
 ---
