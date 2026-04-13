@@ -4,26 +4,28 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+const langPrefix = lang === 'es' ? '' : `/${lang}`;
+
 const navItems = [
   {
     title: t("nav.skills"),
     label: "habilidades",
-    url: "/#habilidades",
+    url: `${langPrefix}/#habilidades`,
   },
   {
     title: t("nav.about"),
     label: "sobre-mi",
-    url: "/#sobre-mi",
+    url: `${langPrefix}/#sobre-mi`,
   },
   {
     title: t("nav.education"),
     label: "educacion",
-    url: "/#educacion",
+    url: `${langPrefix}/#educacion`,
   },
   {
     title: t("nav.projects"),
     label: "proyectos",
-    url: "/#proyectos",
+    url: `${langPrefix}/#proyectos`,
   }
 ]
 ---
