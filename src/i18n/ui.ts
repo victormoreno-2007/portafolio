@@ -71,6 +71,15 @@ export const ui = {
         "projects.item5.btn": "Ver código",
         "projects.item5.btn2": "Ir al sitio web",
 
+        "contact.title": "Contáctame",
+        "contact.subtitle": "¿Tienes un proyecto en mente o simplemente quieres saludar? Escríbeme y te responderé lo antes posible.",
+        "contact.name": "Tu nombre",
+        "contact.email": "Tu correo electrónico",
+        "contact.message": "Mensaje",
+        "contact.send": "Enviar mensaje",
+        "contact.success": "¡Mensaje enviado con éxito! Te responderé pronto.",
+
+
         "footer.title": "Casi todos los derechos reservados.",
         "footer.contact": "Contacto",
     },
@@ -138,6 +147,15 @@ export const ui = {
         "projects.item5.description": "Automated workflow that analyzes geolocated routes, checks the weather at multiple points along the journey, and uses AI agents (Google Gemini) to generate personalized road safety recommendations (motorcycle, car, or on foot). Includes geographic data processing with JavaScript and persistence in relational databases.",
         "projects.item5.btn": "View code",
         "projects.item5.btn2": "Go to website",
+
+        "contact.title": "Contact me",
+        "contact.subtitle": "Have a project in mind or just want to say hi? Write me and I'll get back to you as soon as possible.",
+        "contact.name": "Your name",
+        "contact.email": "Your email",
+        "contact.message": "Message",
+        "contact.send": "Send message",
+        "contact.success": "Message sent successfully! I'll get back to you soon.",
+
 
         "footer.title": "Almost all rights reserved.",
         "footer.contact": "Contact",

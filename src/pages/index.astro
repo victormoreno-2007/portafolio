@@ -15,6 +15,9 @@ import SystemIcon from "@/components/icons/System.astro";
 import Education from "@/components/Education.astro";
 import SchoolIcon from "@/components/icons/School.astro";
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import ContactForm from "@/components/ContactForm.astro";
+import MailIcon from "@/components/icons/Mail.astro";
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -62,7 +65,16 @@ const t = useTranslations(lang);
         </TitleSection>
         <Projects />
       </SectionContainer>
-      
+      <SectionContainer id="contacto" class="reveal">
+        <TitleSection>
+          <MailIcon class="size-7" />
+          {t("contact.title")}
+        </TitleSection>
+        <p class="text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          {t("contact.subtitle")}
+        </p>
+        <ContactForm />
+      </SectionContainer>
     </div>
   </main>
 </Layout>
