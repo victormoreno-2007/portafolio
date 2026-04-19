@@ -46,6 +46,12 @@ export const ui = {
         "education.item3.date": "2024",
         "education.item3.description": "Educación secundaria completada con éxito.",
 
+        "education.item4.title": "Club Java Master - Novato a Experto Java +110hrs",
+        "education.item4.school": "Udemy",
+        "education.item4.date": "Abril 2026",
+        "education.item4.description": "Curso intensivo de 110 horas que cubre Java desde cero hasta nivel experto. Incluye POO, colecciones, genéricos, streams, lambdas, manejo de excepciones, concurrencia y fundamentos de Spring Boot.",
+        "education.item4.certificate": "Ver certificado",
+
         "projects.title": "Proyectos destacados",
         "projects.item1.title": "Gestor de Reservas de Salas de Coworking",
         "projects.item1.description": "Construir una API REST con Python que permita el registro e inicio de sesión de usuarios con autenticación, la creación y administración de salas de coworking, sistema de reservas con validaciones de horarios y la generación de reportes simples.",
@@ -123,6 +129,12 @@ export const ui = {
         "education.item3.school": "I.E La Inmaculada Concepción",
         "education.item3.date": "2024",
         "education.item3.description": "Secondary education successfully completed.",
+
+        "education.item4.title": "Club Java Master - Beginner to Expert Java +110hrs",
+        "education.item4.school": "Udemy",
+        "education.item4.date": "April 2026",
+        "education.item4.description": "Intensive 110-hour course covering Java from beginner to expert level. Topics include OOP, collections, generics, streams, lambdas, exception handling, concurrency, and Spring Boot fundamentals.",
+        "education.item4.certificate": "View certificate",
 
         "projects.title": "Featured Projects",
         "projects.item1.title": "Coworking Room Reservation Manager",
